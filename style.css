@@ -1,0 +1,27 @@
+
+
+body {
+	font-family: "Lucida Console", Times, serif;
+	font-size: 23px;
+	text-align: center;
+	background-image: url("imgs/backgrounds/site_background.jpg");
+	overflow-x: hidden;
+}
+
+h1 {
+	margin: 0;
+	color: white;
+}
+
+h1:hover{
+  transform: scale(1.1);
+  transition: all ease 500ms;
+}
+
+#game-window {
+	border: 5px solid black;
+}
+
+#cv-window {
+	border: 5px solid black;
+}
