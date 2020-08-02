@@ -499,11 +499,11 @@ let stairs3 		= new Block(1500, floor_one.y-150, 150, 200, 1);
 let stairs4 		= new Block(1650, floor_one.y-50, 150, 100, 1);
 
 // Second Obstacle
-let ceiling1 		= new Block(2400, 0, 150, floor_one-200, 1);
-let ceiling2 		= new Block(2550, 0, 150, floor_one-250, 1);
-let ceiling3 		= new Block(2700, 0, 150, floor_one-250, 1);
-let ceiling4 		= new Block(2850, 0, 150, floor_one-250, 1);
-let ceiling5 		= new Block(3000, 0, 150, floor_one-200, 1);
+let ceiling1 		= new Block(2400, 0, 150, floor_one.y-200, 1);
+let ceiling2 		= new Block(2550, 0, 150, floor_one.y-250, 1);
+let ceiling3 		= new Block(2700, 0, 150, floor_one.y-250, 1);
+let ceiling4 		= new Block(2850, 0, 150, floor_one.y-250, 1);
+let ceiling5 		= new Block(3000, 0, 150, floor_one.y-200, 1);
 
 let stairs5 		= new Block(2400, floor_one.y-50, 150, 100, 1);
 let tunnel_floor_1 	= new Block(2550, floor_one.y-100, 150, 100, 1);
