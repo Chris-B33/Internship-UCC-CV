@@ -1,13 +1,13 @@
 const canvas 	= document.getElementById("game-window");
-const ctx 		= canvas.getContext("2d");
+const ctx 	= canvas.getContext("2d");
 canvas.width 	= 1200
 canvas.height 	= 1018
 
 //###################################################
 
 //***VARIABLES***
-const speed = 3;
-var level 	= 0;
+const speed 		= 3;
+var level 		= 0;
 var collisionLeft 	= 0;
 var collisionRight 	= 0;
 var hasMoved 		= 0;
@@ -16,14 +16,14 @@ var hasMoved 		= 0;
 
 //***IMAGES***
 // Background Image
-bgImage 			= new Image();
+bgImage 		= new Image();
 
 // Hero Image
-heroImage 			= new Image();
+heroImage 		= new Image();
 heroImage.src 		= "imgs/hero-1.png";
 
 // Block Image
-blockImage 			= new Image();
+blockImage 		= new Image();
 
 // Prompt Image
 promptImage 		= new Image();
@@ -34,26 +34,26 @@ completedImage 		= new Image();
 completedImage.src 	= "imgs/backgrounds/completed.png";
 
 // Move Image
-moveImage = new Image();
-moveImage.src = "imgs/objs/move.png"
+moveImage 		= new Image();
+moveImage.src		= "imgs/objs/move.png"
 
 // Main Image
-mainImage = new Image();
+mainImage 		= new Image();
 
 // Codes Image
-codesImage = new Image();
-codesImage.src = "imgs/codes.png"
+codesImage 		= new Image();
+codesImage.src 		= "imgs/codes.png"
 
 //###################################################
 
 //***SOUNDS***
-var main_theme 	= new Audio("sounds/main_theme.mp3");
+var main_theme 		= new Audio("sounds/main_theme.mp3");
 
-var level_theme = new Audio("sounds/level_theme.mp3");
+var level_theme 	= new Audio("sounds/level_theme.mp3");
 
 var enter 		= new Audio("sounds/enter_level.mp3");
 
-var cv_audio 	= new Audio("sounds/cv.mp3");
+var cv_audio 		= new Audio("sounds/cv.mp3");
 
 var completed_audio 	= new Audio("sounds/completed.mp3");
 
@@ -80,23 +80,23 @@ var lvl = {
 //*Constructors*
 // Enemy for level 2+
 function Enemy(x,y,width,height,direction,id){
-	this.start_x 	= x;
-	this.start_y 	= y;
-	this.movement 	= x;
+	this.start_x 		= x;
+	this.start_y 		= y;
+	this.movement 		= x;
 	this.x 			= x;
 	this.y 			= y;
-	this.y_velocity = 0;
+	this.y_velocity 	= 0;
 	this.width 		= width;
-	this.height 	= height;
-	this.reverse 	= direction;
+	this.height 		= height;
+	this.reverse 		= direction;
 	this.id 		= id;
 	
 	// Set up image
-	var imageFile 	= new Image();
+	var imageFile 		= new Image();
 	
 	// Return to original position
 	this.start = function(){
-		this.y 			= y;
+		this.y 		= y;
 		this.movement 	= x;
 		this.reverse 	= direction;
 	};
@@ -202,15 +202,15 @@ function Enemy(x,y,width,height,direction,id){
 
 // Floor for every level
 function Floor(x,y,width,height){
-	this.start_x 	= x;
+	this.start_x 		= x;
 	this.x 			= x;
 	this.y 			= y;
 	this.width 		= width;
-	this.height 	= height;
+	this.height 		= height;
 	
 	// Set up image object
-	var imageFile = new Image();
-	imageFile.src = "imgs/objs/floor.png";
+	var imageFile 		= new Image();
+	imageFile.src 		= "imgs/objs/floor.png";
 		
 	// Function to update image and position
 	this.update = function(){
@@ -222,15 +222,15 @@ function Floor(x,y,width,height){
 
 // Blocks
 function Block(x,y,width,height,id){
-	this.start_x 	= x;
+	this.start_x 		= x;
 	this.x 			= x;
 	this.y 			= y;
 	this.width 		= width;
-	this.height 	= height;
+	this.height 		= height;
 	
 	// Set up image
-	var imageFile 	= new Image();
-	this.imageId 	= id;
+	var imageFile 		= new Image();
+	this.imageId 		= id;
 	
 	// Function to update image and position
 	this.update = function(){
@@ -249,10 +249,10 @@ function Block(x,y,width,height,id){
 
 // Background moving objects
 function Background_Obj(x,y,width,height,id){
-	this.start_x 	= x;
+	this.start_x 		= x;
 	this.x 			= x;
 	this.y 			= y;
-	this.movement 	= x;
+	this.movement 		= x;
 	
 	// Set up image object
 	var imageFile = new Image();
@@ -266,10 +266,10 @@ function Background_Obj(x,y,width,height,id){
 		this.movement += speed*0.1;
 		
 		if (imageId==1){
-			this.x 		= this.movement + lvl.x/2;
+			this.x 	= this.movement + lvl.x/2;
 		}
 		else if (imageId==2){
-			this.x 		= this.start_x + lvl.x/4;
+			this.x 	= this.start_x + lvl.x/4;
 		};
 		
 		// Draw Image
@@ -279,21 +279,21 @@ function Background_Obj(x,y,width,height,id){
 
 // Other Objects
 function Obj(x,y,width,height,id){
-	this.start_x = x;
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
+	this.start_x 	= x;
+	this.x 		= x;
+	this.y 		= y;
+	this.width 	= width;
+	this.height 	= height;
 	
 	// Set up image object
-	var imageFile = new Image();
+	var imageFile 	= new Image();
 	// ID for Image File Source
-	this.imageId = id;
+	this.imageId 	= id;
 	
 	// Function to update image and position
 	this.update = function(){
 		// Position
-		this.x = this.start_x + lvl.x;
+		this.x 	= this.start_x + lvl.x;
 		
 		// Change image source based on ID
 		if (this.imageId==0){imageFile.src="imgs/objs/main.png"};
@@ -352,7 +352,7 @@ function createLevel(){
 
 // COLLISION DETECTION
 function collisionDetectionTop(obj1, obj2){ // TESTS IF YOU ARE ON TOP OF AN OBJECT
-	if (obj1.y < obj2.y &&
+	if (	obj1.y < obj2.y &&
 		obj1.y + obj1.height > obj2.y &&
 		obj1.x + obj1.width > obj2.x &&
 		obj1.x < obj2.x + obj2.width)  
@@ -366,7 +366,7 @@ function collisionDetectionTop(obj1, obj2){ // TESTS IF YOU ARE ON TOP OF AN OBJ
 }
 
 function collisionDetectionBottom(obj1, obj2){ // TESTS IF YOU HITTING AN OBJECT FROM BELOW
-	if (obj1.y > obj2.y &&
+	if (	obj1.y > obj2.y &&
 		obj1.y < obj2.y + obj2.height &&
 		obj1.x > obj2.x &&
 		obj1.x + obj1.width < obj2.x + obj2.width)  
@@ -380,7 +380,7 @@ function collisionDetectionBottom(obj1, obj2){ // TESTS IF YOU HITTING AN OBJECT
 }
 
 function collisionDetectionLeft(obj1, obj2){ // TESTS IF YOU ARE HITTING FROM THE LEFT SIDE
-	if (obj1.x < obj2.x &&
+	if (	obj1.x < obj2.x &&
 		obj1.x + obj1.width > obj2.x &&
 		obj1.y < obj2.y + obj2.height&&
 		obj1.y > obj2.y)
@@ -394,7 +394,7 @@ function collisionDetectionLeft(obj1, obj2){ // TESTS IF YOU ARE HITTING FROM TH
 }
 
 function collisionDetectionRight(obj1, obj2){ // TESTS IF YOU ARE HITTING FROM THE RIGHT SIDE SIDE
-	if (obj1.x < obj2.x + obj2.width &&
+	if (	obj1.x < obj2.x + obj2.width &&
 		obj1.x + obj1.width > obj2.x + obj2.width &&
 		obj1.y < obj2.y + obj2.height &&
 		obj1.y > obj2.y)
@@ -447,10 +447,10 @@ function finish(){
 };
 
 function died(){
-	level = 0;
-	hero.x = canvas.width/2;
-	hero.y = floor_main.y-hero.height;
-	lvl.x = 0;
+	level 	= 0;
+	hero.x 	= canvas.width/2;
+	hero.y 	= floor_main.y-hero.height;
+	lvl.x 	= 0;
 };
 
 //###################################################
@@ -471,438 +471,397 @@ addEventListener("keyup", function(e){
 
 //###################################################
 
-// Level Background
 var level_background = [];
+var main_collidable = [];
+var main_uncollidable = [];
 
 // \ Main Menu /
-// Collidable
-var main_collidable = [];
-let floor_main = new Floor(0,798,1200);
-main_collidable.push(floor_main);
+let floor_main 		= new Floor(0, 798, 1200);
+let main_object 	= new Main(0, floor_main.y-350, 1200, 350, 0);
+let cv_check 		= new Obj(90, canvas.height/2-300, 375, 300, 200, 4)
 
-// Uncollidable
-var main_uncollidable = [];
-let main_object = new Main(0,floor_main.y-350,1200,350,0);
+main_collidable.push(floor_main);
 main_uncollidable.push(main_object);
-let cv_check = new Obj(90, canvas.height/2-300,375,300,200,4)
 main_uncollidable.push(cv_check);
 
+
 // \ Level One /
-// Collidable and Uncollidable
-var level_one_collidable 	= [];
-var level_one_uncollidable 	= [];
+var level_one_collidable = [];
+var level_one_uncollidable = [];
 
-let floor_one = new Floor(0,798,6000,100);
-level_one_collidable.push(floor_one);
-
-let jump = new Obj(1000, 300, 300,200, 6);
-level_one_collidable.push(jump);
+let floor_one 		= new Floor(0, 798, 6000, 100);
+let jump 		= new Obj(1000, 300, 300, 200, 6);
 
 // First Obstacle
-let stairs1 = new Block(1200, floor_one.y-50,150,100,1);
-level_one_collidable.push(stairs1);
-let stairs2 = new Block(1350, floor_one.y-100,150,200,1);
-level_one_collidable.push(stairs2);
-let stairs3 = new Block(1500, floor_one.y-150,150,200,1);
-level_one_collidable.push(stairs3);
-let stairs4 = new Block(1650, floor_one.y-50,150,100,1);
-level_one_collidable.push(stairs4);
+let stairs1 		= new Block(1200, floor_one.y-50, 150, 100, 1);
+let stairs2 		= new Block(1350, floor_one.y-100, 150, 200, 1);
+let stairs3 		= new Block(1500, floor_one.y-150, 150, 200, 1);
+let stairs4 		= new Block(1650, floor_one.y-50, 150, 100, 1);
 
 // Second Obstacle
-// Ceiling of Tunnel
-let ceiling1 = new Block(2400,0,150,798-200,1);
-level_one_collidable.push(ceiling1);
-let ceiling2 = new Block(2550,0,150,798-250,1);
-level_one_collidable.push(ceiling2);
-let ceiling3 = new Block(2700,0,150,798-250,1);
-level_one_collidable.push(ceiling3);
-let ceiling4 = new Block(2850,0,150,798-250,1);
-level_one_collidable.push(ceiling4);
-let ceiling5 = new Block(3000,0,150,798-200,1);
-level_one_collidable.push(ceiling5);
+let ceiling1 		= new Block(2400, 0, 150, floor_one.-200, 1);
+let ceiling2 		= new Block(2550, 0, 150, floor_one.-250, 1);
+let ceiling3 		= new Block(2700, 0, 150, floor_one.-250, 1);
+let ceiling4 		= new Block(2850, 0, 150, floor_one.-250, 1);
+let ceiling5 		= new Block(3000, 0, 150, floor_one.-200, 1);
 
-// Tunnel Walls
-let tunnel_wall_1 = new Block(2400,floor_one.y-200,150,150,2);
-level_one_uncollidable.push(tunnel_wall_1);
-let tunnel_wall_2 = new Block(2550,floor_one.y-250,150,150,2);
-level_one_uncollidable.push(tunnel_wall_2);
-let tunnel_wall_3 = new Block(2700,floor_one.y-250,150,150,2);
-level_one_uncollidable.push(tunnel_wall_3);
-let tunnel_wall_4 = new Block(2850,floor_one.y-250,150,150,2);
-level_one_uncollidable.push(tunnel_wall_4);
-let tunnel_wall_5 = new Block(3000,floor_one.y-200,150,150,2);
-level_one_uncollidable.push(tunnel_wall_5);
+let stairs5 		= new Block(2400, floor_one.y-50, 150, 100, 1);
+let tunnel_floor_1 	= new Block(2550, floor_one.y-100, 150, 100, 1);
+let tunnel_floor_2 	= new Block(2700, floor_one.y-100, 150, 100, 1);
+let tunnel_floor_3 	= new Block(2850, floor_one.y-100, 150, 100, 1);
+let stairs6 		= new Block(3000, floor_one.y-50, 150, 100, 1);
 
-// Floor of tunnel
-let stairs5 = new Block(2400,floor_one.y-50,150,100,1);
-level_one_collidable.push(stairs5);
-let tunnel_floor_1 = new Block(2550,floor_one.y-100,150,100,1);
-level_one_collidable.push(tunnel_floor_1);
-let tunnel_floor_2 = new Block(2700,floor_one.y-100,150,100,1);
-level_one_collidable.push(tunnel_floor_2);
-let tunnel_floor_3 = new Block(2850,floor_one.y-100,150,100,1);
-level_one_collidable.push(tunnel_floor_3);
-let stairs6 = new Block(3000, floor_one.y-50, 150,100,1);
-level_one_collidable.push(stairs6);
+let tunnel_wall_1 	= new Block(2400, floor_one.y-200, 150, 150, 2);
+let tunnel_wall_2 	= new Block(2550, floor_one.y-250, 150, 150, 2);
+let tunnel_wall_3 	= new Block(2700, floor_one.y-250, 150, 150, 2);
+let tunnel_wall_4 	= new Block(2850, floor_one.y-250, 150, 150, 2);
+let tunnel_wall_5 	= new Block(3000, floor_one.y-200, 150, 150, 2);
 
 // Start and End
-let start1 = new Obj(0,578,500,400,1);
+let start1		= new Obj(0, 578, 500, 400, 1);
+let end1 		= new Obj(5000-600-300, floor_one.y-150, 600, 150, 2);
+
+level_one_collidable.push(floor_one);
+level_one_collidable.push(jump);
+level_one_collidable.push(stairs1);
+level_one_collidable.push(stairs2);
+level_one_collidable.push(stairs3);
+level_one_collidable.push(stairs4);
+level_one_collidable.push(ceiling1);
+level_one_collidable.push(ceiling2);
+level_one_collidable.push(ceiling3);
+level_one_collidable.push(ceiling4);
+level_one_collidable.push(ceiling5);
+level_one_collidable.push(stairs5);
+level_one_collidable.push(tunnel_floor_1);
+level_one_collidable.push(tunnel_floor_2);
+level_one_collidable.push(tunnel_floor_3);
+level_one_collidable.push(stairs6);
+level_one_uncollidable.push(tunnel_wall_1);
+level_one_uncollidable.push(tunnel_wall_2);
+level_one_uncollidable.push(tunnel_wall_3);
+level_one_uncollidable.push(tunnel_wall_4);
+level_one_uncollidable.push(tunnel_wall_5);
 level_one_uncollidable.push(start1)
-let end1 = new Obj(5000-600-300,floor_one.y-150,600,150,2);
 level_one_uncollidable.push(end1);
 
 
 // \ Level Two /
-// Collidable and Uncollidable
-var level_two_collidable 	= [];
-var level_two_uncollidable 	= [];
-var level_two_enemies 		= [];
+var level_two_collidable = [];
+var level_two_uncollidable = [];
+var level_two_enemies 	= [];
 
-let floor_two = new Floor(0,798,6000);
-level_two_collidable.push(floor_two);
-
-let avoid = new Obj(1000,300,200,200,7);
-level_two_uncollidable.push(avoid);
+let floor_two 		= new Floor(0, 798, 6000);
+let avoid 		= new Obj(1000, 300, 200, 200, 7);
 
 // First Obstacle
-// Walls for enemies to walk into
-let pit_wall_1 = new Block(1200, floor_two.y-100, 150, 100, 1);
-level_two_collidable.push(pit_wall_1);
-let pit_wall_2 = new Block(2250, floor_two.y-100, 150, 100, 1);
-level_two_collidable.push(pit_wall_2);
+let pit_wall_1 		= new Block(1200, floor_two.y-100, 150, 100, 1);
+let pit_wall_2 		= new Block(2250, floor_two.y-100, 150, 100, 1);
 
-// Little pillars between pit walls
-let pit_pillar_1 = new Block(1450, floor_two.y-170, 150, 300, 1);
-level_two_collidable.push(pit_pillar_1);
-let pit_pillar_2 = new Block(2000, floor_two.y-170, 150, 300, 1);
-level_two_collidable.push(pit_pillar_2);
-let pit_pillar_3 = new Block(1725, floor_two.y-200, 150, 300, 1);
-level_two_collidable.push(pit_pillar_3);
+let pit_pillar_1 	= new Block(1450, floor_two.y-170, 150, 300, 1);
+let pit_pillar_2 	= new Block(2000, floor_two.y-170, 150, 300, 1);
+let pit_pillar_3 	= new Block(1725, floor_two.y-200, 150, 300, 1);
 
-// Enemies
-let enemy_two_1 = new Enemy(1375,floor_two.y-50,48,33,-1,1);
-level_two_enemies.push(enemy_two_1);
-let enemy_two_2 = new Enemy(1675,floor_two.y-50,48,33,-1,1);
-level_two_enemies.push(enemy_two_2);
-let enemy_two_3 = new Enemy(1975,floor_two.y-50,48,33,-1,1);
-level_two_enemies.push(enemy_two_3);
-let enemy_two_4 = new Enemy(2250,floor_two.y-50,48,33,-1,1);
-level_two_enemies.push(enemy_two_4);
+let enemy_two_1 	= new Enemy(1375, floor_two.y-50, 48, 33, -1, 1);
+let enemy_two_2 	= new Enemy(1675, floor_two.y-50, 48, 33, -1, 1);
+let enemy_two_3 	= new Enemy(1975, floor_two.y-50, 48, 33, -1, 1);
+let enemy_two_4 	= new Enemy(2250, floor_two.y-50, 48, 33, -1, 1);
 
 // Second Obstacle
-// Pillars
-let pillar1 = new Block(2400,floor_two.y-100,150,100,1);
-level_two_collidable.push(pillar1);
-let pillar2 = new Block(3500,floor_two.y-100,150,100,1);
-level_two_collidable.push(pillar2);
-let pillar3 = new Block(3650,floor_two.y-50,150,100,1);
-level_two_collidable.push(pillar3);
+let pillar1 		= new Block(2400, floor_two.y-100, 150, 100, 1);
+let pillar2 		= new Block(3500, floor_two.y-100, 150, 100, 1);
+let pillar3 		= new Block(3650, floor_two.y-50, 150, 100, 1);
 
-// Enemies
-let enemy_two_5 = new Enemy(2450,floor_two.y-50,48,33,1,1);
-level_two_enemies.push(enemy_two_5);
-let enemy_two_6 = new Enemy(2650,floor_two.y-50,48,33,1,1);
-level_two_enemies.push(enemy_two_6);
-let enemy_two_7 = new Enemy(2850,floor_two.y-50,48,33,1,1);
-level_two_enemies.push(enemy_two_7);
+let enemy_two_5 	= new Enemy(2450, floor_two.y-50, 48, 33, 1, 1);
+let enemy_two_6 	= new Enemy(2650, floor_two.y-50, 48, 33, 1, 1);
+let enemy_two_7 	= new Enemy(2850, floor_two.y-50, 48, 33, 1, 1);
 
 // Start and End
-let start2 = new Obj(0,578,500,400,1);
-level_two_uncollidable.push(start2)
-let end2 = new Obj(5000-600-300,floor_two.y-150,600,150,2);
+let start2 		= new Obj(0, 578, 500, 400, 1);
+let end2 		= new Obj(5000-600-300, floor_two.y-150, 600, 150, 2);
+
+level_two_collidable.push(floor_two);
+level_two_collidable.push(pit_wall_1);
+level_two_collidable.push(pit_wall_2);
+level_two_collidable.push(pit_pillar_1);
+level_two_collidable.push(pit_pillar_2);
+level_two_collidable.push(pit_pillar_3);
+level_two_collidable.push(pillar1);
+level_two_collidable.push(pillar2);
+level_two_collidable.push(pillar3);
+level_two_uncollidable.push(avoid);
+level_two_uncollidable.push(start2);
 level_two_uncollidable.push(end2);
+level_two_enemies.push(enemy_two_1);
+level_two_enemies.push(enemy_two_2);
+level_two_enemies.push(enemy_two_3);
+level_two_enemies.push(enemy_two_4);
+level_two_enemies.push(enemy_two_5);
+level_two_enemies.push(enemy_two_6);
+level_two_enemies.push(enemy_two_7);
 
 
 // \ Level Three /
-// Collidable
-var level_three_collidable 		= [];
-var level_three_uncollidable 	= [];
-var level_three_enemies 		= [];
+var level_three_collidable = [];
+var level_three_uncollidable = [];
+var level_three_enemies = [];
 
-let floor_three = new Floor(0,798,6000,100);
-level_three_collidable.push(floor_three);
-
-let is_fast = new Obj(1000,300,200,200,8);
-level_three_uncollidable.push(is_fast);
+let floor_three 		= new Floor(0, 798, 6000, 100);
+let is_fast 			= new Obj(1000, 300, 200, 200, 8);
 
 // First Obstacle
-let small_wall_1 = new Block(1000,floor_three.y-50,150,50,1);
-level_three_collidable.push(small_wall_1);
-let small_wall_2 = new Block(1850,floor_three.y-50,150,50,1);
-level_three_collidable.push(small_wall_2);
+let small_wall_1 		= new Block(1000, floor_three.y-50, 150, 50,1);
+let small_wall_2 		= new Block(1850, floor_three.y-50, 150, 50,1);
 
-// Enemies
-let enemy_three_1 = new Enemy(1950,floor_three.y-50,48,32,-1,2);
-level_three_enemies.push(enemy_three_1);
+let enemy_three_1 		= new Enemy(1950, floor_three.y-50, 48, 32, -1, 2);
 
 // Second Obstacle
-// Small stair
-let small_wall_3 = new Block(2000,floor_three.y-100,150,100,1);
-level_three_collidable.push(small_wall_3);
+let small_wall_3 		= new Block(2000, floor_three.y-100, 150, 100, 1);
 
-// Tunnel Ceilings
-let tunnel_ceiling_three_1 = new Block(2150,floor_three.y-200,150,50,1);
-level_three_collidable.push(tunnel_ceiling_three_1);
-let tunnel_ceiling_three_2 = new Block(2300,floor_three.y-250,150,100,1);
-level_three_collidable.push(tunnel_ceiling_three_2);
-let tunnel_ceiling_three_4 = new Block(2600,floor_three.y-300,150,150,1);
-level_three_collidable.push(tunnel_ceiling_three_4);
-// Gap to fall into <--
-let tunnel_ceiling_three_5 = new Block(2900,floor_three.y-300,150,150,1);
-level_three_collidable.push(tunnel_ceiling_three_5);
-let tunnel_ceiling_three_7 = new Block(3200,floor_three.y-250,150,100,1);
-level_three_collidable.push(tunnel_ceiling_three_7);
-let tunnel_ceiling_three_8 = new Block(3350,floor_three.y-200,150,50,1);
-level_three_collidable.push(tunnel_ceiling_three_8);
+let tunnel_ceiling_three_1 	= new Block(2150, floor_three.y-200, 150, 50, 1);
 
-// Tunnel Walls
-let tunnel_three_wall_1 = new Block(2150,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_1);
-let tunnel_three_wall_2 = new Block(2300,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_2);
-let tunnel_three_wall_3 = new Block(2450,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_3);
-let tunnel_three_wall_4 = new Block(2600,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_4);
-let tunnel_three_wall_5 = new Block(2750,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_5);
-let tunnel_three_wall_6 = new Block(2900,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_6);
-let tunnel_three_wall_7 = new Block(3050,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_7);
-let tunnel_three_wall_8 = new Block(3200,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_8);
-let tunnel_three_wall_9 = new Block(3350,floor_three.y-150,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_9);
-let tunnel_three_wall_10 = new Block(2750,floor_three.y-225,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_10);
-let tunnel_three_wall_11 = new Block(2750,floor_three.y-250,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_11);
-let tunnel_three_wall_12 = new Block(2450,floor_three.y-225,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_12);
-let tunnel_three_wall_13 = new Block(3050,floor_three.y-225,150,150,2);
-level_three_uncollidable.push(tunnel_three_wall_13);
+let tunnel_ceiling_three_2 	= new Block(2300, floor_three.y-250, 150, 100, 1);
+let tunnel_ceiling_three_3 	= new Block(2600, floor_three.y-300, 150, 150, 1);
+let tunnel_ceiling_three_4 	= new Block(2900, floor_three.y-300, 150, 150, 1);
+let tunnel_ceiling_three_5 	= new Block(3200, floor_three.y-250, 150, 100, 1);
+let tunnel_ceiling_three_6 	= new Block(3350, floor_three.y-200, 150, 50, 1);
 
-// Tunnel Floors
-let tunnel_floor_three_1 = new Block(2150,floor_three.y,150,150,1)
-level_three_uncollidable.push(tunnel_floor_three_1);
-let tunnel_floor_three_2 = new Block(2300,floor_three.y,150,150,1)
-level_three_uncollidable.push(tunnel_floor_three_2);
-let tunnel_floor_three_3 = new Block(2450,floor_three.y,150,150,1);
-level_three_uncollidable.push(tunnel_floor_three_3);
-let tunnel_floor_three_4 = new Block(2600,floor_three.y,150,150,1)
-level_three_uncollidable.push(tunnel_floor_three_4);
-let tunnel_floor_three_5 = new Block(2750,floor_three.y,150,150,1)
-level_three_uncollidable.push(tunnel_floor_three_5);
-let tunnel_floor_three_6 = new Block(2900,floor_three.y,150,150,1);
-level_three_uncollidable.push(tunnel_floor_three_6);
-let tunnel_floor_three_7 = new Block(3050,floor_three.y,150,150,1);
-level_three_uncollidable.push(tunnel_floor_three_7);
-let tunnel_floor_three_8 = new Block(3200,floor_three.y,150,150,1);
-level_three_uncollidable.push(tunnel_floor_three_8);
-let tunnel_floor_three_9 = new Block(3350,floor_three.y,150,150,1);
-level_three_uncollidable.push(tunnel_floor_three_9);
+let tunnel_three_wall_1 	= new Block(2150, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_2 	= new Block(2300, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_3 	= new Block(2450, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_4 	= new Block(2600, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_5 	= new Block(2750, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_6 	= new Block(2900, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_7 	= new Block(3050, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_8 	= new Block(3200, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_9 	= new Block(3350, floor_three.y-150, 150, 150, 2);
+let tunnel_three_wall_10 	= new Block(2750, floor_three.y-225, 150, 150, 2);
+let tunnel_three_wall_11 	= new Block(2750, floor_three.y-250, 150, 150, 2);
+let tunnel_three_wall_12 	= new Block(2450, floor_three.y-225, 150, 150, 2);
+let tunnel_three_wall_13 	= new Block(3050, floor_three.y-225, 150, 150, 2);
 
-// End Stairs
-let small_wall_4 = new Block(3500,floor_three.y-100,150,100,1);
-level_three_collidable.push(small_wall_4);
-let small_wall_5 = new Block(3650,floor_three.y-50,150,50,1);
-level_three_collidable.push(small_wall_5);
+let tunnel_floor_three_1 	= new Block(2150, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_2 	= new Block(2300, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_3 	= new Block(2450, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_4 	= new Block(2600, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_5 	= new Block(2750, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_6 	= new Block(2900, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_7 	= new Block(3050, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_8 	= new Block(3200, floor_three.y, 150, 150, 1);
+let tunnel_floor_three_9 	= new Block(3350, floor_three.y, 150, 150, 1);
 
-// Enemies
-let enemy_three_2 = new Enemy(2300,floor_three.y-50,48,32,1,2);
-level_three_enemies.push(enemy_three_2);
-let enemy_three_3 = new Enemy(3200,floor_three.y-50,48,32,-1,2);
-level_three_enemies.push(enemy_three_3);
-let enemy_three_4 = new Enemy(2500,floor_three.y-250,48,32,1,1);
-level_three_enemies.push(enemy_three_4);
-let enemy_three_5 = new Enemy(3000,floor_three.y-250,48,32,-1,1);
-level_three_enemies.push(enemy_three_5);
+let small_wall_4 		= new Block(3500, floor_three.y-100, 150, 100, 1);
+let small_wall_5 		= new Block(3650, floor_three.y-50, 150, 50, 1);
+
+let enemy_three_2 		= new Enemy(2300, floor_three.y-50, 48, 32, 1, 2);
+let enemy_three_3 		= new Enemy(3200, floor_three.y-50, 48, 32, -1, 2);
+let enemy_three_4 		= new Enemy(2500, floor_three.y-250, 48, 32, 1, 1);
+let enemy_three_5 		= new Enemy(3000, floor_three.y-250, 48, 32, -1, 1);
 
 // Start and End
-let start3 = new Obj(0,578,50,400,1);
+let start3 			= new Obj(0, 578, 50, 400, 1);
+let end3 			= new Obj(5000-600-300, floor_three.y-150, 600, 150, 2);
+
+level_three_collidable.push(floor_three);
+level_three_collidable.push(small_wall_1);
+level_three_collidable.push(small_wall_2);
+level_three_collidable.push(small_wall_3);
+level_three_collidable.push(tunnel_ceiling_three_1);
+level_three_collidable.push(tunnel_ceiling_three_2);
+level_three_collidable.push(tunnel_ceiling_three_3);
+level_three_collidable.push(tunnel_ceiling_three_4);
+level_three_collidable.push(tunnel_ceiling_three_5);
+level_three_collidable.push(tunnel_ceiling_three_6);
+level_three_collidable.push(small_wall_4);
+level_three_collidable.push(small_wall_5);
+level_three_uncollidable.push(is_fast);
+level_three_uncollidable.push(tunnel_three_wall_1);
+level_three_uncollidable.push(tunnel_three_wall_2);
+level_three_uncollidable.push(tunnel_three_wall_3);
+level_three_uncollidable.push(tunnel_three_wall_4);
+level_three_uncollidable.push(tunnel_three_wall_5);
+level_three_uncollidable.push(tunnel_three_wall_6);
+level_three_uncollidable.push(tunnel_three_wall_7);
+level_three_uncollidable.push(tunnel_three_wall_8);
+level_three_uncollidable.push(tunnel_three_wall_9);
+level_three_uncollidable.push(tunnel_three_wall_10);
+level_three_uncollidable.push(tunnel_three_wall_11);
+level_three_uncollidable.push(tunnel_three_wall_12);
+level_three_uncollidable.push(tunnel_three_wall_13);
+level_three_uncollidable.push(tunnel_floor_three_1);
+level_three_uncollidable.push(tunnel_floor_three_2);
+level_three_uncollidable.push(tunnel_floor_three_3);
+level_three_uncollidable.push(tunnel_floor_three_4);
+level_three_uncollidable.push(tunnel_floor_three_5);
+level_three_uncollidable.push(tunnel_floor_three_6);
+level_three_uncollidable.push(tunnel_floor_three_7);
+level_three_uncollidable.push(tunnel_floor_three_8);
+level_three_uncollidable.push(tunnel_floor_three_9);
 level_three_uncollidable.push(start3);
-let end3 = new Obj(5000-600-300,floor_three.y-150,600,150,2);
 level_three_uncollidable.push(end3);
+level_three_enemies.push(enemy_three_1);
+level_three_enemies.push(enemy_three_2);
+level_three_enemies.push(enemy_three_3);
+level_three_enemies.push(enemy_three_4);
+level_three_enemies.push(enemy_three_5);
 
 
 // \ Level Four /
-// Collidable
-var level_four_collidable	= [];
+var level_four_collidable = [];
 var level_four_uncollidable = [];
-var level_four_enemies 		= [];
+var level_four_enemies = [];
 
 let floor_four_1 = new Floor(0,798,9000,100);
-level_four_collidable.push(floor_four_1);
-
-// Stairs to first obstacle
-let stairs_four_1 = new Block(1150, floor_four_1.y-50, 150,100,1);
-level_four_collidable.push(stairs_four_1);
-// New Floor
 let floor_four_2 = new Floor(1300,800-100,8000,318);
-level_four_collidable.push(floor_four_2);
-// Enemy Close
+
+let stairs_four_1 = new Block(1150, floor_four_1.y-50, 150,100,1);
 let enemy_four_1 = new Enemy(1400,floor_four_2.y-50,48,32,-1,2);
-level_four_enemies.push(enemy_four_1);
 
 // First Obstacle
-// Edges of obstacle
 let pillar_four_1 = new Block(1500,floor_four_2.y-50,150,100,1);
-level_four_collidable.push(pillar_four_1);
 let pillar_four_2 = new Block(3200,floor_four_2.y-50,150,100,1);
-level_four_collidable.push(pillar_four_2);
 
-// Ceilings to walk under
+
 let ceiling_four_1 = new Block(1850,0,150,1018-floor_four_2.height-100,1);
-level_four_collidable.push(ceiling_four_1);
 let ceiling_four_2 = new Block(2100,0,150,1018-floor_four_2.height-100,1);
-level_four_collidable.push(ceiling_four_2);
 let ceiling_four_3 = new Block(2350,0,150,1018-floor_four_2.height-100,1);
-level_four_collidable.push(ceiling_four_3);
 let ceiling_four_4 = new Block(2600,0,150,1018-floor_four_2.height-100,1);
-level_four_collidable.push(ceiling_four_4);
 let ceiling_four_5 = new Block(2850,0,150,1018-floor_four_2.height-100,1);
-level_four_collidable.push(ceiling_four_5);
 
-// Tunnel walls
 let wall_four_1 = new Block(1850,600,150,150,2);
-level_four_uncollidable.push(wall_four_1);
 let wall_four_2 = new Block(2100,600,150,150,2);
-level_four_uncollidable.push(wall_four_2);
 let wall_four_3 = new Block(2350,600,150,150,2);
-level_four_uncollidable.push(wall_four_3);
 let wall_four_4 = new Block(2600,600,150,150,2);
-level_four_uncollidable.push(wall_four_4);
 let wall_four_5 = new Block(2850,600,150,150,2);
-level_four_uncollidable.push(wall_four_5);
 
-// Enemies
 let enemy_four_2 = new Enemy(2100,floor_four_2.y-50,48,32,1,1);
-level_four_enemies.push(enemy_four_2);
 let enemy_four_3 = new Enemy(2100,floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_3);
 
 // Second Obstacle
-// Pillar at either end
 let pillar_four_3 = new Block(3350,floor_four_2.y-100,150,100,1);
-level_four_collidable.push(pillar_four_3);
 let pillar_four_4 = new Block(5350,floor_four_2.y-100,150,100,1);
-level_four_collidable.push(pillar_four_4);
 
-// Enemies
 let enemy_four_4 = new Enemy(3500, floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_4);
 let enemy_four_5 = new Enemy(3800, floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_5);
 let enemy_four_6 = new Enemy(4200, floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_6);
 let enemy_four_7 = new Enemy(4500, floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_7);
 let enemy_four_8 = new Enemy(4800, floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_8);
 
 // Third Obstacle
-// First Pillars
 let pillar_four_5 = new Block(5500,floor_four_2.y-150,150,150,1);
-level_four_collidable.push(pillar_four_5);
 let pillar_four_6 = new Block(5650,floor_four_2.y-200,150,200,1);
-level_four_collidable.push(pillar_four_6);
 let pillar_four_7 = new Block(5800,floor_four_2.y-250,150,250,1);
-level_four_collidable.push(pillar_four_7);
-
-// End Pillars
 let pillar_four_8 = new Block(7300,floor_four_2.y-250,150,250,1);
-level_four_collidable.push(pillar_four_8);
 let pillar_four_9 = new Block(7450,floor_four_2.y-200,150,200,1);
-level_four_collidable.push(pillar_four_9);
 let pillar_four_10 = new Block(7600,floor_four_2.y-150,150,150,1);
-level_four_collidable.push(pillar_four_10);
 let pillar_four_11 = new Block(7750,floor_four_2.y-100,150,100,1);
-level_four_collidable.push(pillar_four_11);
 let pillar_four_12 = new Block(7900,floor_four_2.y-50,150,100,1);
-level_four_collidable.push(pillar_four_12);
 
-// Walls between pillars
-// First Layer
 let wall_four_6 = new Block(5950,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_6);
 let wall_four_7 = new Block(6100,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_7);
 let wall_four_8 = new Block(6250,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_8);
 let wall_four_9 = new Block(6400,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_9);
 let wall_four_10 = new Block(6550,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_10);
 let wall_four_11 = new Block(6700,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_11);
 let wall_four_12 = new Block(6850,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_12);
 let wall_four_13 = new Block(7000,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_13);
 let wall_four_14 = new Block(7150,floor_four_2.y-125,150,150,2);
-level_four_uncollidable.push(wall_four_14);
 
-// Second Layer
 let wall_four_15 = new Block(5950,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_15);
 let wall_four_16 = new Block(6100,floor_four_2.y-200,150,150,2);
-level_four_uncollidable.push(wall_four_16);
 let wall_four_17 = new Block(6250,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_17);
 let wall_four_18 = new Block(6400,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_18);
 let wall_four_19 = new Block(6550,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_19);
 let wall_four_20 = new Block(6700,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_20);
 let wall_four_21 = new Block(6850,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_21);
 let wall_four_22 = new Block(7000,floor_four_2.y-200,150,150,2);
-level_four_uncollidable.push(wall_four_22);
 let wall_four_23 = new Block(7150,floor_four_2.y-250,150,150,2);
-level_four_uncollidable.push(wall_four_23);
-
-// One extra layer for the middle
 let wall_four_24 = new Block(6550,floor_four_2.y-300,150,150,2);
-level_four_uncollidable.push(wall_four_24);
 
-// Jumps
 let block_four_1 = new Block(wall_four_16.x, wall_four_16.y-100,150,100,3);
-level_four_collidable.push(block_four_1);
 let block_four_2 = new Block(wall_four_18.x, wall_four_18.y-100,150,100,3);
-level_four_collidable.push(block_four_2);
 let block_four_3 = new Block(wall_four_20.x, wall_four_20.y-100,150,100,3);
-level_four_collidable.push(block_four_3);
 let block_four_4 = new Block(wall_four_22.x, wall_four_22.y-100,150,100,3);
-level_four_collidable.push(block_four_4);
 
-// Enemies
-// Slow
 let enemy_four_9 = new Enemy(6000,floor_four_2.y-50,48,32,1,1);
-level_four_enemies.push(enemy_four_9);
 let enemy_four_10 = new Enemy(6150,floor_four_2.y-50,48,32,1,1);
-level_four_enemies.push(enemy_four_10);
 let enemy_four_11 = new Enemy(6300,floor_four_2.y-50,48,32,1,1);
-level_four_enemies.push(enemy_four_11);
 let enemy_four_12 = new Enemy(6450,floor_four_2.y-50,48,32,1,1);
-level_four_enemies.push(enemy_four_12);
 let enemy_four_13 = new Enemy(6600,floor_four_2.y-50,48,32,1,1);
-level_four_enemies.push(enemy_four_13);
-
-// Fast
 let enemy_four_14 = new Enemy(6750,floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_14);
 let enemy_four_15 = new Enemy(6900,floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_15);
 let enemy_four_16 = new Enemy(7050,floor_four_2.y-50,48,32,1,2);
-level_four_enemies.push(enemy_four_16);
 
 // Start and End
 let start4 = new Obj(0,578,50,400,1);
-level_four_uncollidable.push(start4);
 let end4 = new Obj(9000-600-300,floor_four_2.y-150,600,150,2);
+
+level_four_collidable.push(floor_four_1);
+level_four_collidable.push(floor_four_2);
+level_four_collidable.push(stairs_four_1);
+level_four_collidable.push(block_four_1);
+level_four_collidable.push(block_four_2);
+level_four_collidable.push(block_four_3);
+level_four_collidable.push(block_four_4);
+level_four_collidable.push(pillar_four_1);
+level_four_collidable.push(pillar_four_2);
+level_four_collidable.push(ceiling_four_1);
+level_four_collidable.push(ceiling_four_2);
+level_four_collidable.push(ceiling_four_3);
+level_four_collidable.push(ceiling_four_4);
+level_four_collidable.push(ceiling_four_5);
+level_four_collidable.push(pillar_four_3);
+level_four_collidable.push(pillar_four_4);
+level_four_collidable.push(pillar_four_5);
+level_four_collidable.push(pillar_four_6);
+level_four_collidable.push(pillar_four_7);
+level_four_collidable.push(pillar_four_8);
+level_four_collidable.push(pillar_four_9);
+level_four_collidable.push(pillar_four_10);
+level_four_collidable.push(pillar_four_11);
+level_four_collidable.push(pillar_four_12);
+level_four_uncollidable.push(wall_four_1);
+level_four_uncollidable.push(wall_four_2);
+level_four_uncollidable.push(wall_four_3);
+level_four_uncollidable.push(wall_four_4);
+level_four_uncollidable.push(wall_four_5);
+level_four_uncollidable.push(wall_four_6);
+level_four_uncollidable.push(wall_four_7);
+level_four_uncollidable.push(wall_four_8);
+level_four_uncollidable.push(wall_four_9);
+level_four_uncollidable.push(wall_four_10);
+level_four_uncollidable.push(wall_four_11);
+level_four_uncollidable.push(wall_four_12);
+level_four_uncollidable.push(wall_four_13);
+level_four_uncollidable.push(wall_four_14);
+level_four_uncollidable.push(wall_four_15);
+level_four_uncollidable.push(wall_four_16);
+level_four_uncollidable.push(wall_four_17);
+level_four_uncollidable.push(wall_four_18);
+level_four_uncollidable.push(wall_four_19);
+level_four_uncollidable.push(wall_four_20);
+level_four_uncollidable.push(wall_four_21);
+level_four_uncollidable.push(wall_four_22);
+level_four_uncollidable.push(wall_four_23);
+level_four_uncollidable.push(wall_four_24);
+level_four_uncollidable.push(start4);
 level_four_uncollidable.push(end4);
+level_four_enemies.push(enemy_four_1);
+level_four_enemies.push(enemy_four_2);
+level_four_enemies.push(enemy_four_3);
+level_four_enemies.push(enemy_four_4);
+level_four_enemies.push(enemy_four_5);
+level_four_enemies.push(enemy_four_6);
+level_four_enemies.push(enemy_four_7);
+level_four_enemies.push(enemy_four_8);
+level_four_enemies.push(enemy_four_9);
+level_four_enemies.push(enemy_four_10);
+level_four_enemies.push(enemy_four_11);
+level_four_enemies.push(enemy_four_12);
+level_four_enemies.push(enemy_four_13);
+level_four_enemies.push(enemy_four_14);
+level_four_enemies.push(enemy_four_15);
+level_four_enemies.push(enemy_four_16);
 
 //###################################################
 
@@ -922,15 +881,15 @@ var game = function() {
 	// Forces affecting Hero
 	hero.y_velocity += speed*0.3;
 	if (level==0){
-		hero.x += hero.x_velocity;
+		hero.x 	+= hero.x_velocity;
 	}
 	else {
-		lvl.x += lvl.x_velocity;
+		lvl.x 	+= lvl.x_velocity;
 	};
-	hero.y  += hero.y_velocity;
-	hero.x_velocity *= 0.9;
-	hero.y_velocity *= 0.9;
-	lvl.x_velocity *= 0.9;
+	hero.y  		+= hero.y_velocity;
+	hero.x_velocity 	*= 0.9;
+	hero.y_velocity 	*= 0.9;
+	lvl.x_velocity 		*= 0.9;
 	
 	// Play main audio
 	if (level==0){
@@ -940,7 +899,7 @@ var game = function() {
 	}
 	else {
 		main_theme.pause();
-		main_theme.currentTime = 0;
+		main_theme.currentTime 	= 0;
 		level_theme.play();
 	};
 	
@@ -949,86 +908,86 @@ var game = function() {
 		ctx.drawImage(codesImage,10,10);
 		for (var i = 0; i<main_collidable.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, main_collidable[i])==true){
-				hero.y = main_collidable[i].y-hero.height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 1;
+				hero.y 			= main_collidable[i].y-hero.height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 1;
 				break
 			}
 		}
 	}
 	else if (level==1){
-		collisionLeft = 0;
-		collisionRight = 0;
+		collisionLeft 	= 0;
+		collisionRight 	= 0;
 		
 		// TOUCHING OBJECTS
 		for (var i = 0; i<level_one_collidable.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, level_one_collidable[i])==true){
-				hero.y = level_one_collidable[i].y-hero.height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 1;
+				hero.y 			= level_one_collidable[i].y-hero.height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 1;
 				break
 			}
 			if (collisionDetectionBottom(hero, level_one_collidable[i])==true){
-				hero.y = level_one_collidable[i].y+level_one_collidable[i].height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 0;
+				hero.y 			= level_one_collidable[i].y+level_one_collidable[i].height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 0;
 				break
 			}
 		};
 		for (var i = 0; i<level_one_collidable.length; i++){ // HITTING FROM LEFT OR RIGHT
 			if (collisionDetectionLeft(hero, level_one_collidable[i])==true){
-				hero.x = level_one_collidable[i].x-hero.width+1;
-				lvl.x = lvl.x+1;
-				collisionLeft = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_one_collidable[i].x-hero.width+1;
+				lvl.x 			= lvl.x+1;
+				collisionLeft 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 			if (collisionDetectionRight(hero, level_one_collidable[i])==true){
-				hero.x = level_one_collidable[i].x+level_one_collidable[i].width-1;
-				lvl.x = lvl.x-1;
-				collisionRight = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_one_collidable[i].x+level_one_collidable[i].width-1;
+				lvl.x 			= lvl.x-1;
+				collisionRight 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 		};
 	}
 	else if (level==2){
-		collisionLeft = 0;
-		collisionRight = 0;
+		collisionLeft 	= 0;
+		collisionRight 	= 0;
 		
 		// TOUCHING OBJECTS
 		for (var i = 0; i<level_two_collidable.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, level_two_collidable[i])==true){
-				hero.y = level_two_collidable[i].y-hero.height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 1;
+				hero.y 			= level_two_collidable[i].y-hero.height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 1;
 				break
 			}
 			if (collisionDetectionBottom(hero, level_two_collidable[i])==true){
-				hero.y = level_two_collidable[i].y+level_two_collidable[i].height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 0;
+				hero.y 			= level_two_collidable[i].y+level_two_collidable[i].height;
+				hero.y_velocity		= 0;
+				hero.isGrounded 	= 0;
 				break
 			}
 		};
 		for (var i = 0; i<level_two_collidable.length; i++){ // HITTING FROM LEFT OR RIGHT
 			if (collisionDetectionLeft(hero, level_two_collidable[i])==true){
-				hero.x = level_two_collidable[i].x-hero.width+1;
-				lvl.x = lvl.x+1;
-				collisionLeft = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_two_collidable[i].x-hero.width+1;
+				lvl.x 			= lvl.x+1;
+				collisionLeft 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 			if (collisionDetectionRight(hero, level_two_collidable[i])==true){
-				hero.x = level_two_collidable[i].x+level_two_collidable[i].width-1;
-				lvl.x = lvl.x-1;
-				collisionRight = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_two_collidable[i].x+level_two_collidable[i].width-1;
+				lvl.x 			= lvl.x-1;
+				collisionRight 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 		};
 		
-		//TOUCHING ENEMIES
+		// TOUCHING ENEMIES
 		for (var i = 0; i<level_two_enemies.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, level_two_enemies[i])==true){
 				died();
@@ -1052,42 +1011,42 @@ var game = function() {
 		};
 	}
 	else if (level==3){
-		collisionLeft = 0;
-		collisionRight = 0;
+		collisionLeft 	= 0;
+		collisionRight 	= 0;
 		
 		// TOUCHING OBJECTS
 		for (var i = 0; i<level_three_collidable.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, level_three_collidable[i])==true){
-				hero.y = level_three_collidable[i].y-hero.height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 1;
+				hero.y 			= level_three_collidable[i].y-hero.height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 1;
 				break
 			}
 			if (collisionDetectionBottom(hero, level_three_collidable[i])==true){
-				hero.y = level_three_collidable[i].y+level_three_collidable[i].height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 0;
+				hero.y 			= level_three_collidable[i].y+level_three_collidable[i].height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 0;
 				break
 			}
 		};
 		for (var i = 0; i<level_three_collidable.length; i++){ // HITTING FROM LEFT OR RIGHT
 			if (collisionDetectionLeft(hero, level_three_collidable[i])==true){
-				hero.x = level_three_collidable[i].x-hero.width+1;
-				lvl.x = lvl.x+1;
-				collisionLeft = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_three_collidable[i].x-hero.width+1;
+				lvl.x 			= lvl.x+1;
+				collisionLeft 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 			if (collisionDetectionRight(hero, level_three_collidable[i])==true){
-				hero.x = level_three_collidable[i].x+level_three_collidable[i].width-1;
-				lvl.x = lvl.x-1;
-				collisionRight = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_three_collidable[i].x+level_three_collidable[i].width-1;
+				lvl.x 			= lvl.x-1;
+				collisionRight 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 		};
 		
-		//TOUCHING ENEMIES
+		// TOUCHING ENEMIES
 		for (var i = 0; i<level_three_enemies.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, level_three_enemies[i])==true){
 				died();
@@ -1111,37 +1070,37 @@ var game = function() {
 		};
 	}
 	else if (level==4){
-		collisionLeft = 0;
-		collisionRight = 0;
+		collisionLeft 	= 0;
+		collisionRight 	= 0;
 		
 		// TOUCHING OBJECTS
 		for (var i = 0; i<level_four_collidable.length; i++){ // STANDING ON OR HITTING FROM BELOW
 			if (collisionDetectionTop(hero, level_four_collidable[i])==true){
-				hero.y = level_four_collidable[i].y-hero.height;
-				hero.y_velocity = 0;
+				hero.y 			= level_four_collidable[i].y-hero.height;
+				hero.y_velocity 	= 0;
 				hero.isGrounded = 1;
 				break
 			}
 			if (collisionDetectionBottom(hero, level_four_collidable[i])==true){
-				hero.y = level_four_collidable[i].y+level_four_collidable[i].height;
-				hero.y_velocity = 0;
-				hero.isGrounded = 0;
+				hero.y 			= level_four_collidable[i].y+level_four_collidable[i].height;
+				hero.y_velocity 	= 0;
+				hero.isGrounded 	= 0;
 				break
 			}
 		};
 		for (var i = 0; i<level_four_collidable.length; i++){ // HITTING FROM LEFT OR RIGHT
 			if (collisionDetectionLeft(hero, level_four_collidable[i])==true){
-				hero.x = level_four_collidable[i].x-hero.width+1;
-				lvl.x = lvl.x+1;
-				collisionLeft = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_four_collidable[i].x-hero.width+1;
+				lvl.x 			= lvl.x+1;
+				collisionLeft		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 			if (collisionDetectionRight(hero, level_four_collidable[i])==true){
-				hero.x = level_four_collidable[i].x+level_four_collidable[i].width-1;
-				lvl.x = lvl.x-1;
-				collisionRight = 1;
-				hero.x_velocity = 0;
+				hero.x 			= level_four_collidable[i].x+level_four_collidable[i].width-1;
+				lvl.x 			= lvl.x-1;
+				collisionRight 		= 1;
+				hero.x_velocity 	= 0;
 				break
 			}
 		};
@@ -1172,25 +1131,25 @@ var game = function() {
 	
 	// Check borders
 	if (hero.x < 0) {
-		hero.x = 0;
-		hero.x_velocity = 0;
+		hero.x 			= 0;
+		hero.x_velocity 	= 0;
 	}
 	else if (hero.x > canvas.width-hero.width) {
-		hero.x = canvas.width-hero.width;
-		hero.x_velocity = 0;
+		hero.x 			= canvas.width-hero.width;
+		hero.x_velocity 	= 0;
 	};
 	if (hero.y+hero.height>canvas.height){
 		died();
 	};
 	if (level != 0) {
 		if (lvl.x > 0) {
-			lvl.x = 0;
-			lvl.x_velocity = 0;
+			lvl.x 		= 0;
+			lvl.x_velocity 	= 0;
 		}
 		// End of Level
 		else if (lvl.x < (lvl.width-canvas.width)*-1) {
-			lvl.x = -(lvl.width-canvas.width)
-			lvl.x_velocity = 0;
+			lvl.x 		= -(lvl.width-canvas.width)
+			lvl.x_velocity 	= 0;
 			finish();
 		};
 	};
@@ -1200,31 +1159,31 @@ var game = function() {
 		collisionLeft == 0 &&
 		collisionRight == 0 &&
 		(87 in keysDown || 38 in keysDown)){ // Jump
-			hero.y_velocity -= 25;
-			hero.isGrounded = 0;
+			hero.y_velocity 	-= 25;
+			hero.isGrounded 	= 0;
 	};
 	
 	if (level == 0) {
 		if (65 in keysDown || 37 in keysDown) { // Move Left
-			heroImage.src = "imgs/hero-2.png";
-			hero.x_velocity -= speed/4;
+			heroImage.src 		= "imgs/hero-2.png";
+			hero.x_velocity 	-= speed/4;
 		};
 		if (68 in keysDown || 39 in keysDown) { // Move Right
-			heroImage.src = "imgs/hero-1.png";
-			hero.x_velocity += speed/4;
+			heroImage.src 		= "imgs/hero-1.png";
+			hero.x_velocity 	+= speed/4;
 		};
 	}
 	else {
 		if (65 in keysDown  || 37 in keysDown) { // Move Left
-			heroImage.src = "imgs/hero-2.png";
-			lvl.x_velocity += speed/4;
+			heroImage.src 		= "imgs/hero-2.png";
+			lvl.x_velocity 		+= speed/4;
 		}
 		else if (68 in keysDown  || 39 in keysDown) { // Move Right
-			heroImage.src = "imgs/hero-1.png";
-			lvl.x_velocity -= speed/4;
+			heroImage.src 		= "imgs/hero-1.png";
+			lvl.x_velocity 		-= speed/4;
 		};
 		if (collisionLeft == 1 || collisionRight == 1){
-			lvl.x_velocity = 0;
+			lvl.x_velocity 		= 0;
 		}
 	};
 	
@@ -1236,9 +1195,9 @@ var game = function() {
 			// If interacted with
 			if (32 in keysDown) {
 				enter.play();
-				hero.x = canvas.width/2 - hero.width/2;
-				lvl.x = 0;
-				level = 1;
+				hero.x 		= canvas.width/2 - hero.width/2;
+				lvl.x 		= 0;
+				level 		= 1;
 			}
 		}
 		// Level 2
@@ -1248,9 +1207,9 @@ var game = function() {
 				// If interacted with
 				if (32 in keysDown) {
 					enter.play();
-					hero.x = canvas.width/2 - hero.width/2;
-					lvl.x = 0;
-					level = 2;
+					hero.x 	= canvas.width/2 - hero.width/2;
+					lvl.x 	= 0;
+					level 	= 2;
 					for (var i=0; i<level_two_enemies.length; i++){
 						level_two_enemies[i].start();
 					}
@@ -1264,9 +1223,9 @@ var game = function() {
 				// If interacted with
 				if (32 in keysDown) {
 					enter.play();
-					hero.x = canvas.width/2 - hero.width/2;
-					lvl.x = 0;
-					level = 3;
+					hero.x 	= canvas.width/2 - hero.width/2;
+					lvl.x 	= 0;
+					level 	= 3;
 					for (var i=0; i<level_three_enemies.length; i++){
 						level_three_enemies[i].start();
 					}
@@ -1280,9 +1239,9 @@ var game = function() {
 				// If interacted with
 				if (32 in keysDown) {
 					enter.play();
-					hero.x = canvas.width/2 - hero.width/2;
-					lvl.x = 0;
-					level = 4;
+					hero.x 	= canvas.width/2 - hero.width/2;
+					lvl.x 	= 0;
+					level 	= 4;
 					for (var i=0; i<level_four_enemies.length; i++){
 						level_four_enemies[i].start();
 					}
