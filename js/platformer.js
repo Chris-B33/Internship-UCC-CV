@@ -245,35 +245,35 @@ function Block(x,y,width,height,id){
 	}
 };
 
-// Background moving objects
-function Background_Obj(x,y,width,height,id){
-	this.start_x 		= x;
-	this.x 			= x;
-	this.y 			= y;
-	this.movement 		= x;
-	
-	// Set up image object
-	var imageFile = new Image();
-	this.imageId = id;
-	
-	if (imageId==1){imageFile.src="imgs/backgrounds/clouds.png"};
-	if (imageId==2){imageFile.src="imgs/backgrounds/mountains.png"};
-	
-	this.update = function(){
-		// Position
-		this.movement += speed*0.1;
-		
-		if (imageId==1){
-			this.x 	= this.movement + lvl.x/2;
-		}
-		else if (imageId==2){
-			this.x 	= this.start_x + lvl.x/4;
-		};
-		
-		// Draw Image
-		ctx.drawImage(imageFile, this.x, this.y)
-	}
-}
+// Background moving objects -REDACTED-
+//function Background_Obj(x,y,width,height,id){
+//	this.start_x 		= x;
+//	this.x 			= x;
+//	this.y 			= y;
+//	this.movement 		= x;
+//	
+//	// Set up image object
+//	var imageFile = new Image();
+//	this.imageId = id;
+//	
+//	if (imageId==1){imageFile.src="imgs/backgrounds/clouds.png"};
+//	if (imageId==2){imageFile.src="imgs/backgrounds/mountains.png"};
+//	
+//	this.update = function(){
+//		// Position
+//		this.movement += speed*0.1;
+//		
+//		if (imageId==1){
+//			this.x 	= this.movement + lvl.x/2;
+//		}
+//		else if (imageId==2){
+//			this.x 	= this.start_x + lvl.x/4;
+//		};
+//		
+//		// Draw Image
+//		ctx.drawImage(imageFile, this.x, this.y)
+//	}
+//}
 
 // Other Objects
 function Obj(x,y,width,height,id){
@@ -338,10 +338,10 @@ function createLevel(){
 	// Draw Background (Sky)
 	ctx.drawImage(bgImage,0,0);
 	
-	// Draw moving background elements (Mts, Clouds)
-	for (var i=0; i<level_background.length; i++){
-		level_background[i].update();
-	};
+	// Draw moving background elements (Mts, Clouds) -REDACTED-
+	//for (var i=0; i<level_background.length; i++){
+	//	level_background[i].update();
+	//};
 	
 	// Draw foreground (Enemies, Paths)
 	updateObjects();
@@ -406,9 +406,9 @@ function collisionDetectionRight(obj1, obj2){ // TESTS IF YOU ARE HITTING FROM T
 
 // Update each object's position and image
 function updateObjects(){
-	for (var i=0; i<level_background.length; i++){
-		level_background[i].update();
-	};
+      //for (var i=0; i<level_background.length; i++){ -REDACTED-
+      //level_background[i].update();
+      //};
 	if (level==0){for (var i=0; i<main_collidable.length; i++){main_collidable[i].update()}
 				for (var i=0; i<main_uncollidable.length; i++){main_uncollidable[i].update()}}
 	if (level==1){for (var i=0; i<level_one_collidable.length; i++){level_one_collidable[i].update()}
@@ -468,7 +468,7 @@ addEventListener("keyup", function(e){
 
 //###################################################
 
-var level_background = [];
+//var level_background = []; -REDACTED-
 var main_collidable = [];
 var main_uncollidable = [];
 
