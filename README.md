@@ -10,6 +10,6 @@
 
 - Download the project to your computer and extract.
 
-- Open **cv.html** in the main directory.
+- Open **cv.html** from the main directory.
 
 - Play away!
