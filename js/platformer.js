@@ -17,13 +17,11 @@ var hasMoved 		= 0;
 //***IMAGES***
 // Background Image
 bgImage 		= new Image();
+bgImage.src 		= "imgs/backgrounds/level_background.png";
 
 // Hero Image
 heroImage 		= new Image();
 heroImage.src 		= "imgs/hero-1.png";
-
-// Block Image
-blockImage 		= new Image();
 
 // Prompt Image
 promptImage 		= new Image();
@@ -327,7 +325,6 @@ function Main(){
 //***FUNCTIONS***
 // Draws background and creates objects in level
 function createLevel(){
-	bgImage.src = "imgs/backgrounds/level_background.png";
 	if (level == 0){
 		lvl.x 		= 0;
 		lvl.width 	= 1200;
