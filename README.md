@@ -13,3 +13,5 @@ I decided to make this as Covid was just started, I was becoming interested in J
 
 It is not required to download this repository to run the application. 
 Opening <a href="https://htmlpreview.github.io/?https://github.com/Chris-B33/Internship-UCC-CV/blob/master/cv.html">this link</a> will bring you to a HTML preview through Github to run it.
+<br>
+However, if you want to use it offline, download as a zip or clone the repository. You can then open index.html to play. 
