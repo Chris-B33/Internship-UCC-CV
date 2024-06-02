@@ -16,6 +16,13 @@ h1:hover{
   transition: all ease 500ms;
 }
 
+#canvas-container {
+	display: flex;
+	justify-content: center;
+	height: 100vh;
+	gap: 10px;
+}
+
 #game-window {
 	border: 5px solid black;
 }
