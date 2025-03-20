@@ -1,6 +1,6 @@
 # UCC Internship CV
 
-<a href="https://htmlpreview.github.io/?https://github.com/Chris-B33/Internship-UCC-CV/blob/master/index.html"><img alt="Static Badge" src="https://img.shields.io/badge/Preview-Application"></a
+<a href="https://htmlpreview.github.io/?https://github.com/Chris-B33/Internship-UCC-CV/blob/master/index.html"><img alt="Static Badge" src="https://img.shields.io/badge/Preview-Application">
 
 ## Description
 
