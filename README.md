@@ -1,8 +1,6 @@
 # UCC Internship CV
 
-<a href="https://htmlpreview.github.io/?https://github.com/Chris-B33/Internship-UCC-CV/blob/master/index.html"><img alt="Static Badge" src="https://img.shields.io/badge/Preview-Application"></a>
-<img alt="GitHub forks" src="https://img.shields.io/github/forks/Chris-B33/Internship-UCC-CV">
-<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Chris-B33/Internship-UCC-CV">
+<a href="https://htmlpreview.github.io/?https://github.com/Chris-B33/Internship-UCC-CV/blob/master/index.html"><img alt="Static Badge" src="https://img.shields.io/badge/Preview-Application"></a
 
 ## Description
 
